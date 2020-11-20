@@ -1718,3 +1718,43 @@ class Solution:
         return m+n
 
 
+class Solution:
+    def sumZero(self, n: int) -> List[int]:
+        result = []
+        if n % 2 == 1 :
+            result.append(0)
+        
+        for i in range(1, n//2 +1):
+            result.append(i)
+            result.append(-i)
+        return result 
+
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        a = []
+        for i in range(arr[-1] + k):
+            if i+1 not in arr and len(a) < k:
+                a.append(i+1)
+        return a[-1]
+
+class Solution:
+    def countNegatives(self, grid: List[List[int]]) -> int:
+        a = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] < 0:
+                    a += len(grid[0]) - j
+                    break
+        return a
+
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        a = [x for x in nums if x >0]
+        if len(a) > 0:
+            for i in range(max(a) + 1):
+                if i + 1 not in a:
+                    return i+1
+        else:
+            return 1
+
+        
