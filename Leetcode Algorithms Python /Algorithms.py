@@ -1757,4 +1757,18 @@ class Solution:
         else:
             return 1
 
-        
+class Solution:
+    def busyStudent(self, startTime: List[int], endTime: List[int], queryTime: int) -> int:
+        a = 0
+        for i, j in zip(startTime, endTime):
+            if queryTime >= i and queryTime <= j:
+                a += 1
+        return a     
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        l = len(arr)
+        d = collections.Counter(arr)
+        for key in d:
+            if d[key]/l > 0.25:
+                return key
+
