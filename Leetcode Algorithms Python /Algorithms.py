@@ -865,10 +865,10 @@ class Solution:
                     return True
         return False
 
-The isBadVersion API is already defined for you.
-@param version, an integer
-@return an integer
-def isBadVersion(version):
+#The isBadVersion API is already defined for you.
+#@param version, an integer
+#@return an integer
+#def isBadVersion(version):
 
 class Solution:
     def firstBadVersion(self, n):
@@ -1024,7 +1024,7 @@ class Solution:
 
 def solve(n):
    
-  Base case
+  #Base case
   if n < 1:
     return 0
   if n == 1:
