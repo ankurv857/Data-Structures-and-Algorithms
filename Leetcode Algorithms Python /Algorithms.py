@@ -1772,3 +1772,29 @@ class Solution:
             if d[key]/l > 0.25:
                 return key
 
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        _s = [str(x) for x in str(s)]
+        a = ''
+        ans = []
+        for i, x in enumerate(_s):
+            a += x
+            if x == ' ':
+                ans.append(a[:-1])
+                a = ''
+            if i == (len(_s)-1):
+                ans.append(a)
+        ans_ = ""
+        for i, x in enumerate(reversed(ans)):
+            ans_ = ans_ + ' '  + x
+        return ans_[1:]
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s = s.split()
+        s = s[::-1]
+        ans = ''
+        for x in s:
+            ans += x
+            ans += " "
+        return ans.strip()
