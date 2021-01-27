@@ -1839,6 +1839,20 @@
 #                 return A[i]+A[i+1]+A[i+2]
 #         return 0
 
+# class Solution:
+#     def minSubarray(self, nums, p) -> int:
+#         # print(nums[1:3]) ; exit()
+#         # j = 0
+#         add = sum(nums)
+#         if add%p == 0:
+#             return 0
+
+# Solution().minSubarray([3,1,4,2], 6)
+
+S = ["ADBECODEBANC"]
+l = ['ABC']
+ans = 4
+
 class Solution:
     def minSubarray(self, nums, p) -> int:
         # print(nums[1:3]) ; exit()
