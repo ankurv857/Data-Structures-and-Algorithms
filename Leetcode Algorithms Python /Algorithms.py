@@ -1849,16 +1849,53 @@
 
 # Solution().minSubarray([3,1,4,2], 6)
 
-S = ["ADBECODEBANC"]
-l = ['ABC']
-ans = 4
+# S = ["ADBECODEBANC"]
+# l = ['ABC']
+# ans = 4
+
+# class Solution:
+#     def minSubarray(self, nums, p) -> int:
+#         # print(nums[1:3]) ; exit()
+#         # j = 0
+#         add = sum(nums)
+#         if add%p == 0:
+#             return 0
+
+# Solution().minSubarray([3,1,4,2], 6)
 
 class Solution:
-    def minSubarray(self, nums, p) -> int:
-        # print(nums[1:3]) ; exit()
-        # j = 0
-        add = sum(nums)
-        if add%p == 0:
-            return 0
+    def addDigits(self, num: int) -> int:
+        while len(str(num)) > 1:
+            a = 0
+            for x in str(num):
+                a += int(x)
+            num = a
+        return num
 
-Solution().minSubarray([3,1,4,2], 6)
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        if n == 1:
+            return True
+        seen = {}
+        while n != 1:
+            sqa_summed = sum([(int(i) ** 2) for i in str(n)])
+            if sqa_summed not in seen:
+                seen[sqa_summed] = sqa_summed
+                n = sqa_summed
+            else:
+                return False
+
+        return True
+
+class Solution:
+    def isUgly(self, num: int) -> bool:
+        if num < 1:
+            return False
+        for factor in [2,3,5]:
+            while num % factor == 0:
+                num = num//factor
+        if num == 1:
+            return True
+        else:
+            return False
+
