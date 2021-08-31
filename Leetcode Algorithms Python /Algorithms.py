@@ -1863,39 +1863,50 @@
 
 # Solution().minSubarray([3,1,4,2], 6)
 
-class Solution:
-    def addDigits(self, num: int) -> int:
-        while len(str(num)) > 1:
-            a = 0
-            for x in str(num):
-                a += int(x)
-            num = a
-        return num
+# class Solution:
+#     def addDigits(self, num: int) -> int:
+#         while len(str(num)) > 1:
+#             a = 0
+#             for x in str(num):
+#                 a += int(x)
+#             num = a
+#         return num
+
+# class Solution:
+#     def isHappy(self, n: int) -> bool:
+#         if n == 1:
+#             return True
+#         seen = {}
+#         while n != 1:
+#             sqa_summed = sum([(int(i) ** 2) for i in str(n)])
+#             if sqa_summed not in seen:
+#                 seen[sqa_summed] = sqa_summed
+#                 n = sqa_summed
+#             else:
+#                 return False
+
+#         return True
+
+# class Solution:
+#     def isUgly(self, num: int) -> bool:
+#         if num < 1:
+#             return False
+#         for factor in [2,3,5]:
+#             while num % factor == 0:
+#                 num = num//factor
+#         if num == 1:
+#             return True
+#         else:
+#             return False
 
 class Solution:
-    def isHappy(self, n: int) -> bool:
-        if n == 1:
-            return True
-        seen = {}
-        while n != 1:
-            sqa_summed = sum([(int(i) ** 2) for i in str(n)])
-            if sqa_summed not in seen:
-                seen[sqa_summed] = sqa_summed
-                n = sqa_summed
+    def twoSum(self, nums, target: int):
+        dic = {}
+        for index, num in enumerate(nums):
+            _sum = target - num
+            if _sum in dic:
+                return [dic[_sum], index]
             else:
-                return False
+                dic[num] = index
 
-        return True
-
-class Solution:
-    def isUgly(self, num: int) -> bool:
-        if num < 1:
-            return False
-        for factor in [2,3,5]:
-            while num % factor == 0:
-                num = num//factor
-        if num == 1:
-            return True
-        else:
-            return False
-
+print(Solution().twoSum([2,3,4], 7))
