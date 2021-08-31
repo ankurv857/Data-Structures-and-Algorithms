@@ -1899,14 +1899,14 @@
 #         else:
 #             return False
 
-class Solution:
-    def twoSum(self, nums, target: int):
-        dic = {}
-        for index, num in enumerate(nums):
-            _sum = target - num
-            if _sum in dic:
-                return [dic[_sum], index]
-            else:
-                dic[num] = index
+# class Solution:
+#     def twoSum(self, nums, target: int):
+#         dic = {}
+#         for index, num in enumerate(nums):
+#             _sum = target - num
+#             if _sum in dic:
+#                 return [dic[_sum], index]
+#             else:
+#                 dic[num] = index
 
 print(Solution().twoSum([2,3,4], 7))
