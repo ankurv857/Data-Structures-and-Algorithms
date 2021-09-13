@@ -1910,3 +1910,95 @@
 #                 dic[num] = index
 
 print(Solution().twoSum([2,3,4], 7))
+
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        s_list = [str(x) for x in s]
+        s_dict = collections.defaultdict(int)
+        for n in s_list:
+            s_dict[n] += 1
+        s_dict = {k:v for k,v in sorted(s_dict.items(), 
+                                        key = lambda item: item[1],
+                                       reverse = True)}
+        answer = []
+        for key in s_dict:
+            answer += [key]*s_dict[key]
+        return ''.join(x for x in answer)
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        s_list = [str(x) for x in s]
+        s_dict = collections.defaultdict(int)
+        for n in s_list:
+            s_dict[n] += 1
+        for key in s_dict:
+            if s_dict[key] == 1:
+                return s_list.index(key)
+        return -1
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        nums_dict = collections.defaultdict(int)
+        for n in nums:
+            nums_dict[n] += 1
+        nums_dict = {k:v for k,v in sorted(nums_dict.items(),
+                                          key = lambda item: item[1],
+                                          reverse = True)}
+        answer = []
+        for i, key in enumerate(nums_dict):
+            if i <= k-1:
+                answer += [key]
+        return answer
+
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        words_ = ' '.join(x for x in words)
+        words_ = words_.lower()
+        words_ = re.sub(r'[^a-zA-Z]', ' ', words_)
+        words_ = words_.split(' ')
+        _dict = collections.defaultdict(int)
+        for n in words_:
+            _dict[n] += 1
+        _dict = {k:_dict[k] for k in sorted(_dict)}
+        _dict = {k:v for k,v in sorted(_dict.items(),
+                                      key = lambda item: item[1],
+                                      reverse = True)}
+        answer = []
+        for i, key in enumerate(_dict):
+            if i <= k-1:
+                answer += [key]
+        return answer
+
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        dist_dict = {}
+        for i, p in enumerate(points):
+            dist = ((p[0])**2 + p[1]**2)**(1/2)
+            dist_dict[i] = dist
+        dist_dict = {k:v for k,v in sorted(dist_dict.items(), 
+                                          key = lambda item: item[1])}
+        ans = []
+        for i, key in enumerate(dist_dict):
+            if i <= k-1:
+                ans += [key]
+        answer = []
+        for a in ans:
+            answer += [points[a]]
+        return answer
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        nums = sorted(nums, reverse = True)
+        if k>=0:
+            return nums[k-1]
+        else:
+            return nums[0]
+
+class Solution:
+    def kthLargestNumber(self, nums: List[str], k: int) -> str:
+        _list = []
+        for x in nums:
+            _list += [int(x)]
+        _list = sorted(_list, reverse = True)
+        return str(_list[k-1])
+
