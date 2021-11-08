@@ -62,5 +62,16 @@ class SLPerceptron():
 
 model = SLPerceptron(df.df())
 
+#Logistic Regression
+class logisticreg():
+    def __init__(self, input_data, lr = 0.01, epoch = 5):
+        self.X, self.y = input_data
+        self.lr = lr
+        self.epoch = epoch
+        self.weight = list(np.random.random_sample(size = list(self.X.shape)[1]))
+        self.fit()
 
+    def fit(self):
+        for e in range(self.epoch):
+            curr_error = 0
 
