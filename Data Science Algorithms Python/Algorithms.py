@@ -19,10 +19,6 @@ class createdf():
         y_df.columns = ['y']
         return x_df, y_df
 
-df = createdf([25,5], [0,2])
-x_df, y_df = df.df()
-# print(x_df, y_df)
-
 #Single Layer Perceptron
 class SLPerceptron():
     def __init__(self, input_data, lr = 0.01, epoch = 5, batch_size = 2):
@@ -60,6 +56,8 @@ class SLPerceptron():
         error =  np.mean([abs(i - j) for i,j in zip(actual, predict)])
         return error
 
+df = createdf([25,5], [0,2])
+x_df, y_df = df.df()
 model = SLPerceptron(df.df())
 
 #Logistic Regression
@@ -73,5 +71,33 @@ class logisticreg():
 
     def fit(self):
         for e in range(self.epoch):
-            curr_error = 0
+            curr_error = self.loss(self.predict(), self.y)
+            if curr_err == 0:
+                break
+            for index, feature in enumerate(list(self.X.T.to_numpy())):
+                gradient = self.gradient(feature)
+                self.weight[index] = self.weight[index] + self.lr * self.weight[index] * gradient
+            print(self.predict(), self.y, self.weight) ; exit()
+
+    def predict(self):
+        preds = []
+        x = list(self.X.to_numpy())
+        for item in x:
+            pred = self.sigmoid(np.dot(item, self.weight))
+            preds.append(pred)
+        return preds
+
+    def loss(self, actual, predict):
+        actual = list(actual['y'].to_numpy())
+        error = np.mean([(-i * np.log(j) - (1-i) * np.log(1-j)) for i, j in zip(actual, predict)])
+        return error
+
+    def gradient(self, feature):
+        return np.mean([i for i in list(feature)])
+
+    def sigmoid(self, a):
+        return 1/(1 + np.exp(-a))
+
+
+
 
