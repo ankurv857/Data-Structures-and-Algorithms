@@ -25,7 +25,7 @@ x_df, y_df = df.df()
 
 #Single Layer Perceptron
 class SLPerceptron():
-    def __init__(self, input_data, lr = 0.01, epoch = 1, batch_size = 2):
+    def __init__(self, input_data, lr = 0.01, epoch = 5, batch_size = 2):
         self.X, self.y = input_data
         self.lr = lr
         self.epoch = epoch
@@ -38,8 +38,10 @@ class SLPerceptron():
             curr_error = self.loss(self.predict(), self.y)
             if curr_error == 0 :
                 break
-            self.weight = [(i + self.lr * i * curr_error) for i in self.weight]
-            print(self.weight) ; exit()
+            for index, feature in enumerate(list(self.X.T.to_numpy())):
+                gradient = self.gradient(feature)
+                self.weight[index] = self.weight[index] + self.lr * self.weight[index] * gradient
+            print(self.predict(), self.y, self.weight) ; exit()
 
 
     def predict(self):
@@ -49,6 +51,9 @@ class SLPerceptron():
             pred = np.dot(item, self.weight)
             preds.append(pred)
         return preds
+
+    def gradient(self, feature):
+        return np.mean([i for i in list(feature)])
 
     def loss(self, predict, actual):
         actual = list(actual['y'].to_numpy())
