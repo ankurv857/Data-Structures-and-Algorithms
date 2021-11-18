@@ -28,4 +28,5 @@ class create_ts():
 
 df = create_ts(20, ["2020-01-01", "2021-10-31"], [22,5], [5,100])
 df = df.df()
+df.to_csv('../data/testdf.csv', index = False)
 print(df)
