@@ -26,7 +26,35 @@ class create_ts():
             df = pd.concat([df, df_temp], axis = 0).reset_index(drop=True)
         return df
 
-df = create_ts(20, ["2020-01-01", "2021-10-31"], [22,5], [5,100])
-df = df.df()
-df.to_csv('../data/testdf.csv', index = False)
-print(df)
+#####################################Run this when the data needs to be changed#####################################
+
+# df = create_ts(20, ["2020-01-01", "2021-10-31"], [22,5], [5,100])
+# df = df.df()
+# df.to_csv('../data/testdf.csv', index = False)
+# print(df)
+
+class create_features():
+    def __init__(self, file):
+        self.file = file
+        data = self.read_data()
+        data = self.common_features(data)
+        data = self.offset_features(data)
+
+    def read_data(self):
+        return pd.read_csv(self.file)
+
+    def common_features(self, data):
+        data['date'] = pd.to_datetime(data['date'])
+        data['day'] = data['date'].dt.day
+        data['month'] = data['date'].dt.month
+        data['year'] = data['date'].dt.year
+        return data
+
+    def offset_features(self, data):
+        for i in range(3):
+            data['lag_' + str(i)] = data.groupby('ts_id')['col_0'].shift(i+1).fillna(method = 'bfill')
+        data['offset'] = data.groupby('ts_id')['y'].shift(3).rolling(2).mean().fillna(method = 'bfill')
+        print(data.head(20))
+
+features = create_features('../data/testdf.csv')
+# print(features.data.head(2))
