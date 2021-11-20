@@ -39,6 +39,7 @@ class create_features():
         data = self.read_data()
         data = self.common_features(data)
         data = self.offset_features(data)
+        data = self.timesince_features(data)
 
     def read_data(self):
         return pd.read_csv(self.file)
@@ -54,7 +55,12 @@ class create_features():
         for i in range(3):
             data['lag_' + str(i)] = data.groupby('ts_id')['col_0'].shift(i+1).fillna(method = 'bfill')
         data['offset'] = data.groupby('ts_id')['y'].shift(3).rolling(2).mean().fillna(method = 'bfill')
-        print(data.head(20))
+        return data
+
+    def timesince_features(self, data):
+        data['col_0_b'] = np.where(data['col_0'] > 0.5, 1, 0)
+        data['col_0_b_timesince'] = data.groupby(['ts_id', (data['col_0_b'] != data['col_0_b'].shift()).cumsum()]).cumcount() + 1
+        print(data.head(40))
 
 features = create_features('../data/testdf.csv')
 # print(features.data.head(2))
