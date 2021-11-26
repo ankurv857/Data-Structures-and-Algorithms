@@ -56,9 +56,9 @@ class SLPerceptron():
         error =  np.mean([abs(i - j) for i,j in zip(actual, predict)])
         return error
 
-df = createdf([25,5], [0,2])
-x_df, y_df = df.df()
-model = SLPerceptron(df.df())
+# df = createdf([25,5], [0,2])
+# x_df, y_df = df.df()
+# model = SLPerceptron(df.df())
 
 #Logistic Regression
 class logisticreg():
@@ -99,5 +99,29 @@ class logisticreg():
         return 1/(1 + np.exp(-a))
 
 
+#K-Means Clustering
+class kmeans():
+    def __init__(self, input_data, iterations = 5, k = 3):
+        self.X, self.y = input_data
+        self.iterations = iterations
+        self.k = k
+        self.fit()
 
+    def fit(self):
+        self.k_dict = dict()
+        self.X_list = self.X.values.tolist()
+        for c in range(self.k):
+            self.k_dict[c] = self.X_list[c]
+        
+        #iterations
+        for i in range(self.iterations):
+            self.classes = dict()
+            for c in range(self.k):
+                self.classes[c] = []
+            for features in self.X_list:
+                
+        print(self.k_dict) ; exit()
 
+df = createdf([25,5], [0,2])
+x_df, y_df = df.df()
+cluster = kmeans(df.df())
